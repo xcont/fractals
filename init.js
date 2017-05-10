@@ -526,7 +526,7 @@ var freezeBattonBefore=0;
 var somethingFreezed=false;
 function press2(n){
 	var buttonn=document.getElementById('button'+n);
-	buttonn.style.borderImage = "url(\"css/border2.png\") 2 repeat";
+	buttonn.style.borderImage = "url(\"border2.png\") 2 repeat";
 	buttonn.style.background = "#EEEEEE";
 	if(somethingFreezed==false){
 		somethingFreezed=true;
@@ -545,7 +545,7 @@ function press2(n){
 function unpress2(n){
 	if (freezeBattonBefore==1 || freezeBattonBefore==2 || freezeBattonBefore==5){
 		var buttonn=document.getElementById('button'+freezeBattonBefore);
-		buttonn.style.borderImage = "url(\"css/border.png\") 2 repeat";
+		buttonn.style.borderImage = "url(\"border.png\") 2 repeat";
 		buttonn.style.background = "#CCCCCC";
 		freezeBattonBefore=0;
 	}else{
@@ -561,13 +561,13 @@ function resetInterface(){
 }
 function press(n){
 	var buttonn=document.getElementById('button'+n);
-	buttonn.style.borderImage = "url(\"css/border2.png\") 2 repeat";
+	buttonn.style.borderImage = "url(\"border2.png\") 2 repeat";
 	buttonn.style.background = "#EEEEEE";
 	resetInterface();
 }
 function unpress(n){
 	var buttonn=document.getElementById('button'+n);
-	buttonn.style.borderImage = "url(\"css/border.png\") 2 repeat";
+	buttonn.style.borderImage = "url(\"border.png\") 2 repeat";
 	buttonn.style.background = "#CCCCCC";
 }
 function recreateMenu(){
