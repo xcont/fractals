@@ -1,0 +1,7 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L]
+RewriteCond %{HTTP_HOST}   !^fractal.xcont.com [NC]
+RewriteRule ^(.*) http://fractal.xcont.com/geom3d$1 [L,R=301]

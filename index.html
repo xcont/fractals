@@ -1,0 +1,185 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Fractals. Genetic algorithms. Evolution</title>
+<meta name="description" content="On this site, with the help of genetic algorithms, you will be able to compose the most beautiful fractal. Algorithm will learn to understand your preferences" />
+<meta name="keywords" content="Genetics, fractal, genetic algorithms, artificial intelligence, evolution" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+<script type="text/javascript" src="draw.js"></script>
+<script type="text/javascript" src="init.js"></script>
+</head>
+<body>
+<div class="header">
+		<div class="settings">
+			<div id="mp1">Mutations <input type="text" id="mutatepercent" value="5" /> %</div>
+			<div id="mp2">Exchanges <input type="checkbox"  id="exchangepercent" value="1" checked="checked" /></div>
+			<div onselectstart="return false">
+				<div id="mp3"><div id="button6" onclick="recreateMenu();" onmousedown="press(6);" onmouseup="unpress(6);">Recreate</div></div>
+				<div id="mp6"><div id="button11" onclick="showAll();" onmousedown="press(11);" onmouseup="unpress(11);">All</div></div>
+				<div id="mp4"><div id="button7" onclick="showHelp();" onmousedown="press(7);" onmouseup="unpress(7);">?</div></div>
+			</div>
+			<div id="mp5">
+				<div id="populationinfo"></div>
+			</div>
+		</div>
+</div>
+<div class="clear"></div>
+<div class="fractal">
+	<div id="fr1">
+		<canvas id="myCanvas1" ontouchend="selecter(1);"></canvas>
+		<div>
+			<div id="button1" onmouseover="showDescription(1)" onmouseout="hideDescription(1)" onclick="freezeDescription(1);" onmousedown="press2(1);" onmouseup="unpress2(1);" onselectstart="return false"></div>
+			<div id="button3" onclick="selecter(1);" onmousedown="press(3);" onmouseup="unpress(3);" onselectstart="return false">Select</div>
+		</div>
+	</div>
+	<div id="fr2">
+		<canvas id="myCanvas2" ontouchend="selecter(2);"></canvas>
+		<div>
+			<div id="button2" onmouseover="showDescription(2)" onmouseout="hideDescription(2)" onclick="freezeDescription(2);" onmousedown="press2(2);" onmouseup="unpress2(2);" onselectstart="return false"></div>
+			<div id="button4" onclick="selecter(2);" onmousedown="press(4);" onmouseup="unpress(4);" onselectstart="return false">Select</div>
+		</div>
+	</div>
+	<div class="set">
+		<div class="buttons">
+			<div id="button5" onclick="evolution();" onmousedown="press(5);" onmouseup="unpress(5);" onselectstart="return false">Start evolution</div>
+		</div>
+	</div>
+	<div id="frinfo">
+		<div id="frinfo1">L</div>
+		<div id="frinfo2">R</div>
+		<div id="parents">
+			<div id="content" onclick="editstart();"></div>
+			<div id="enditicons">
+				<div id="edit1" onclick="editstart();"><img src="css/edit1.png" alt="edit" /></div>
+				<div id="edit2" onclick="editend();"><img src="css/edit2.png" alt="ok" /></div>
+				<div id="edit3" onclick="editcancel();"><img src="css/edit3.png" alt="cancel" /></div>
+			</div>
+			<div id="tree-button">
+				<div id="buttont" onclick="showTree();">
+					<div>Show parents tree</div>
+				</div>
+			</div>
+			<div id="flood-button">
+				<div id="buttonflood">
+					<div>Flood population with this fractal</div>
+				</div>
+			</div>
+			<div id="flood-text">Use flood button only if you're sure. The old population will be destroyed. Flooding uses mutation settings in left up corner</div>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="footer_menu">
+	<ul>
+		<li><a href="http://fractal.xcont.com/2d.html">Create fractal using mouse</a></li>
+		<li><a href="http://fractal.xcont.com/geom3d/">3D geometric fractal</a></li>
+		<li><a href="http://xcont.com/">Fractals in prime numbers</a></li>
+	</ul>
+</div>
+<div id="skm_LockPane" class="LockOff">
+	<div id="new-population">
+		<div class="LockChilds">
+			<div class="newpoptext">Population settings:</div>
+			<div id="mn1"><input type="text" id="minangles" value="4" /> - Minimum number of angles</div>
+			<div id="mn2"><input type="text" id="maxangles" value="16" /> - Maximum number of angles</div>
+			<div id="mn3"><input type="text" id="popsize" value="5" /> x4 - Population size</div>
+			<div class="newpoptext">Angles settings (for populations):</div>
+			<div id="mn6"><input type="text" id="min1" value="-89" /> - Min value of angles (degrees)</div>
+			<div id="mn7"><input type="text" id="max1" value="89" /> - Max value of angles (degrees)</div>
+			<div id="mn8"><input type="text" id="step1" value="1" /> - Step</div>
+			<div class="newpoptext">Angles settings (for mutations):</div>
+			<div id="mn9"><input type="text" id="min2" value="-89" /> - Min value of angles (degrees)</div>
+			<div id="mn10"><input type="text" id="max2" value="89" /> - Max value of angles (degrees)</div>
+			<div id="mn11"><input type="text" id="step2" value="1" /> - Step</div>
+			<div class="clear"></div>
+			<div class="newpoptext"></div>
+			<div id="mn4"><div id="button8" onclick="recreateOk();" onmousedown="press(8);" onmouseup="unpress(8);">Ok</div></div>
+			<div id="mn5"><div id="button9" onclick="recreateCancel();" onmousedown="press(9);" onmouseup="unpress(9);">Cancel</div></div>
+		</div>
+		<div id="notice"><div>Notice! The old populations will be destroyed. </div>Notice notice! Site uses local storage for save populations. Local storage has a limit on amount of data. For best result use small population size. Less than 5x4 - the best.</div>
+	</div>
+	<div id="help">
+		On this site you will be able to train the genetic algorithm for generation the most beautiful fractals. Now the site has generated for you a population of <div id="inhelp"></div>. Below you see two random fractals. Select the fractal that you like best (click on image, if you use touch device), then the next two fractals will be displayed.
+		At any time you can start the selection mechanism. The most adapted fractals will begin to multiply and mutate. After the selection you will be shown the next population of fractals, which, according to the site, you like more...
+		<br />
+		<div id="mh"><div id="button10" onclick="hideHelp();" onmousedown="press(10);" onmouseup="unpress(10);">Ok</div></div>
+		<div class="clear"></div>
+	</div>
+</div>
+<div id="showall" class="showallOff">
+	<div class="showallChild" onselectstart="return false">
+		<div id="menu">
+			<div id="ms1"><div id="button12" onclick="showAllEnd();" onmousedown="press(12);" onmouseup="unpress(12);">Back</div></div>
+			<div id="ms3"><div id="button13" onclick="showAllEvolution();" onmousedown="press(13);" onmouseup="unpress(13);">Start evolution</div></div>
+		</div>
+		<div id="leftt">
+			<div id="selected">
+				<div id="selectedtxt">Selected fractals</div>
+				<div id="selectedcontent"></div>
+			</div>
+			<div id="all">
+				<div id="alltxt">Click for select... unclick fot unselect :)</div>
+				<div id="allcontent"></div>
+			</div>
+		</div>
+		<div id="rightt">
+			<div id="test">
+				<div id="singleinall">
+					<div id="bigdescription"></div>
+					<canvas id="myCanvasSingle"></canvas>
+					<div id="bigdescriptiondown"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="tree" class="treeOff">
+	<div class="treeChild">
+		<div id="treemenu">
+			<div id="mt1"><div id="button14" onclick="hideTree();" onmousedown="press(14);" onmouseup="unpress(14);">Back</div></div>
+		</div>
+		<div id="treeup">
+			<div id="treeupcontent">
+				<div class="onemorediv" id="onemoredivid">
+					<div class="left" id="leftid">
+
+					</div>
+					<div class="right" id="rightid">
+					
+					</div>
+					<div class="clear"></div>
+					<div class="down" id="downid">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="treerdown">
+			<div id="treedowncontent"><canvas id="treedowncanvas"></canvas></div>
+		</div>
+	</div>
+	
+
+	<div id="console-log0"></div>
+	<div id="console-log1"></div>
+	<div id="console-log2"></div>
+	<div id="console-log3"></div>
+
+</div>
+<script>
+	init();
+</script>
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write('<a href="http://www.liveinternet.ru/click" '+
+'target=_blank><img src="http://counter.yadro.ru/hit?t11.6;r'+
+escape(document.referrer)+((typeof(screen)=='undefined')?'':
+';s'+screen.width+'*'+screen.height+'*'+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+';u'+escape(document.URL)+
+';'+Math.random()+
+'" alt="" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодн\я" '+
+'border=0 width=0 height=0><\/a>')//--></script><!--/LiveInternet-->
+
+</body>
+</html>
