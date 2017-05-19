@@ -12,8 +12,16 @@
 <body>
 <div class="header">
 		<div class="settings">
-			<div id="mp1">Mutations <input type="text" id="mutatepercent" value="5" /> %</div>
+			<div id="mp1">Mutations <input type="text" id="mutatepercent" value="20" /> %</div>
 			<div id="mp2">Exchanges <input type="checkbox"  id="exchangepercent" value="1" checked="checked" /></div>
+			<div id="mp20">Draw mode:
+			<select id="drawmode" onchange="changeDrawMode();">
+				<option value="0" selected="null">default</option>
+				<option value="1">mode 1</option>
+				<option value="2">mode 2</option>
+				<option value="3">mode 3</option>
+			</select>
+			</div>
 			<div onselectstart="return false">
 				<div id="mp3"><div id="button6" onclick="recreateMenu();" onmousedown="press(6);" onmouseup="unpress(6);">Recreate</div></div>
 				<div id="mp6"><div id="button11" onclick="showAll();" onmousedown="press(11);" onmouseup="unpress(11);">All</div></div>
@@ -81,7 +89,7 @@
 	<div id="new-population">
 		<div class="LockChilds">
 			<div class="newpoptext">Population settings:</div>
-			<div id="mn1"><input type="text" id="minangles" value="4" /> - Minimum number of angles</div>
+			<div id="mn1"><input type="text" id="minangles" value="14" /> - Minimum number of angles</div>
 			<div id="mn2"><input type="text" id="maxangles" value="16" /> - Maximum number of angles</div>
 			<div id="mn3"><input type="text" id="popsize" value="5" /> x4 - Population size</div>
 			<div class="newpoptext">Angles settings (for populations):</div>

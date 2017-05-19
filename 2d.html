@@ -12,7 +12,17 @@
 </head>
 <body>
 <div class="header">
-
+	<div id="mp20">Draw mode:
+	<select id="drawmode" onchange="changeDrawMode();">
+		<option value="0" selected="null">default</option>
+		<option value="1">mode 1</option>
+		<option value="2">mode 2</option>
+		<option value="3">mode 3</option>
+	</select>
+	</div>
+	<div id="mp1">
+		Select angle that you want to change using mouse (MouseX / MouseY / None). Click on canvas. Right text option - angle multiplier.
+	</div>
 </div>
 <div id="clear"></div>
 <div class="fractal" id="myid">

@@ -1,13 +1,13 @@
 var population=[];
 var fitness=[];
-var anglemin=4; //population with anglemin angles
+var anglemin=14; //population with anglemin angles
 var anglemax=16; //population with anglemax angles
-var PopulationSize=12; // !!! Must be divisible by 4
+var PopulationSize=20; // !!! Must be divisible by 4
 
 
-var min=-89; //angles for create population
-var max=89;
-var step=1;
+var min=-75; //angles for create population
+var max=75;
+var step=15;
 
 var minm=-89; //angles for mutations
 var maxm=89;
@@ -56,7 +56,7 @@ if (docWidth>=2547){
 	xB=300;
 	yB=450;
 }else{
-	canvasSize=Math.floor((docWidth-20)/3.2);																										///!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 3.2
+	canvasSize=Math.floor((docWidth-20)/2.2);																										///!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 3.2
 	xA=Math.floor((canvasSize)/2);
 	yA=Math.floor((canvasSize)/10)*3;
 	xB=Math.floor((canvasSize)/2);
@@ -66,6 +66,30 @@ if (docWidth>=2547){
 
 
 /// local storage functions ///
+var drawmode;
+var drawmodeInStorage;
+function changeDrawMode(){
+	var dm = document.getElementById("drawmode");
+	var dms = dm.options[dm.selectedIndex].value;
+	drawmode=Number(dms);
+	localStorage["fractal.drawmode"] = drawmode;
+	//get2fractals();
+	drawcanvas(1, true);
+	drawcanvas(2, true);
+}
+function getDrawMode(){
+	drawmodeInStorage = (localStorage["fractal.drawmodeInStorage"] == "true");
+	if(drawmodeInStorage){
+		drawmode = JSON.parse(localStorage["fractal.drawmode"]);
+		var dm = document.getElementById("drawmode");
+		dm.value = drawmode;
+	}else{
+		drawmode=0;
+		localStorage["fractal.drawmode"] = drawmode;
+		localStorage["fractal.drawmodeInStorage"] = "true";
+	}
+}
+
 var PopulationInStorage;
 function supportsLocalStorage(){
 	return ('localStorage' in window) && window['localStorage'] !== null;
@@ -197,6 +221,7 @@ function init(){
 	if (!resumePopulation()){
 		newPopulation();
 	}
+	getDrawMode();
 	get2fractals();
 	savePopulation();
 	saveFitness();

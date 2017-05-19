@@ -11,7 +11,31 @@ var angles=[45,-45];
 var mousearray=[];
 var anglesincreasearray=[];
 
+var drawmode;
+var drawmodeInStorage;
+function changeDrawMode(){
+	var dm = document.getElementById("drawmode");
+	var dms = dm.options[dm.selectedIndex].value;
+	drawmode=Number(dms);
+	localStorage["fractal.drawmode"] = drawmode;
+	//get2fractals();
+	drawcanvas();
+}
+function getDrawMode(){
+	drawmodeInStorage = (localStorage["fractal.drawmodeInStorage"] == "true");
+	if(drawmodeInStorage){
+		drawmode = JSON.parse(localStorage["fractal.drawmode"]);
+		var dm = document.getElementById("drawmode");
+		dm.value = drawmode;
+	}else{
+		drawmode=0;
+		localStorage["fractal.drawmode"] = drawmode;
+		localStorage["fractal.drawmodeInStorage"] = "true";
+	}
+}
+
 function init(){
+	getDrawMode();
 	getinputs();
 	drawcanvas();
 }
