@@ -19,14 +19,10 @@ a{
 	font-weight:bold;
 }
 
-.settings	#mp1{
+#mp1, #mp2, #mp20{
 	padding:2px;
 }
-
-.settings	#mp2{
-	padding:2px;
-}
-#mp1, #mp2, #mp3, #mp4, #mp6, #ms1, #ms2, #ms3, #mt1{
+#mp1, #mp2, #mp3, #mp4, #mp6, #ms1, #ms2, #ms3, #mt1, #mp20{
 	float:left;
 	margin-left:10px;
 	background-color: #FFFFFF;
